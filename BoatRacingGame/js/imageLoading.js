@@ -28,7 +28,7 @@ function loadImages() {
             fileName: "images/Water.png"
         }, {
             varName: boat1,
-            fileName: "images/boat1.png"
+            fileName: "images/Boat1.png"
         },
         {
             varName: boat2,
