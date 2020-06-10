@@ -1,0 +1,85 @@
+.jumbotron {
+  position: relative;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+}
+
+.wrapper {
+  background-color: #27ae60;
+}
+
+.carousel {
+  position: relative;
+}
+
+.AAphoto {
+  width: 88%;
+  margin-left: 6%;
+}
+
+.carousel-item {
+  padding: 0% 20% 0% 20%;
+}
+
+.wrapper2 {
+  background-color: none;
+}
+
+.wrapper2 .carousel-caption {
+  color: #27ae60;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+li {
+  padding-bottom: 4px;
+}
+
+.display-5,
+.display-4 {
+  color: #27ae60;
+}
+
+.lead {
+  color: #27ae60;
+}
+
+h2 {
+  color: #27ae60;
+  margin-bottom: -20px;
+}
+
+a {
+  color: #27ae60;
+}
+
+a:hover {
+  color: #27ae60;
+}
+
+.btn-secondary {
+  background-color: #27ae60;
+}
+
+.btn-secondary:hover {
+  background-color: #1d9e1d;
+}
+
+.specialbutton:hover {
+  text-decoration: none;
+}
+
+@media (min-width: 991.98px) {
+  .responsive-border {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 991.979px) {
+  .responsive-border {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}

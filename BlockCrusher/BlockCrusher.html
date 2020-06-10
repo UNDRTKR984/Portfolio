@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block Crusher!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <script>
+    window.onload = function () {
+      canvas = document.getElementById("gameCanvas");
+      context = canvas.getContext("2d");
+
+      canvas.addEventListener("mousemove", updateMousePos);
+
+      resetBlocks();
+      ballReset();
+
+      var framesPerSecond = 30;
+      setInterval(updateAll, 1000 / framesPerSecond);
+    };
+  </script>
+  <script src="/BlockCrusher/BlockCrusher.js"></script>
+</body>
+
+</html>

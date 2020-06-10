@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sort Algorithm demos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- set canvas size -->
+
+  <canvas id="sortCanvas" width="800" height="600"></canvas>
+
+  <!-- script to draw the screen -->
+  <script>
+    var canvas, context;
+
+    var framesPerSec = 60;
+
+    window.onload = function () {
+      canvas = document.getElementById("sortCanvas");
+      context = canvas.getContext("2d");
+
+      document.addEventListener("keydown", triggerSort);
+
+      setInterval(drawAll, 1000 / framesPerSec);
+    };
+
+    function drawAll() {
+      context.fillStyle = "black";
+      context.fillRect(0, 0, WIDTH, HEIGHT);
+      for (let i = 0; i < lineLayout.length; i++) {
+        context.fillStyle = "white";
+        context.fillRect(
+          i * LINE_W,
+          HEIGHT,
+          LINE_W - LINE_GAP,
+          -lineLayout[i]
+        );
+      }
+
+      // instructrions section
+
+      context.font = "20px Arial";
+      context.fillStyle = "lime";
+      context.fillText("Sorting Algorithm", CANV_WIDTH + 15, 100);
+      context.fillText("Visual Demos", CANV_WIDTH + 25, 130);
+      context.font = "13px Arial";
+      context.fillStyle = "white";
+      context.fillText("press 'B' for Bubble Sort", CANV_WIDTH + 20, 300);
+      context.fillText("press 'I' for Insertion Sort", CANV_WIDTH + 20, 315);
+      context.fillText("press 'M' for Merge Sort", CANV_WIDTH + 20, 330);
+      context.fillText("press 'Q' for Quick Sort", CANV_WIDTH + 20, 345);
+      context.fillText("press 'R' for Radix Sort", CANV_WIDTH + 20, 360);
+      context.fillText("press 'S' for Selection Sort", CANV_WIDTH + 20, 375);
+      context.fillText("REFRESH PAGE TO RESET", CANV_WIDTH + 15, 450);
+    }
+
+    // triggerSort -- call the sort functions on the data set (LineLayout) 
+    function triggerSort(evt) {
+      if (evt.key == "b" || evt.key == "B") {
+        bubbleSort(lineLayout);
+      }
+      if (evt.key == "s" || evt.key == "S") {
+        selectionSort(lineLayout);
+      }
+      if (evt.key == "q" || evt.key == "Q") {
+        quickSort(lineLayout);
+      }
+      if (evt.key == "i" || evt.key == "I") {
+        insertionSort(lineLayout);
+      }
+      if (evt.key == "r" || evt.key == "R") {
+        radixSort(lineLayout);
+      }
+      if (evt.key == "m" || evt.key == "M") {
+        mergeSort(lineLayout);
+      }
+    }
+  </script>
+  <script src="sort.js"></script>
+</body>
+
+</html>

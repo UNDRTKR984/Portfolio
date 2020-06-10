@@ -1,0 +1,52 @@
+body {
+    background-color: #836953;
+    color: #77dd77;
+    font-family: 'Rock Salt', cursive;
+    align-items: center;
+    text-align: center;
+    text-shadow: rgba(243, 149, 247, 0.842) 1px 0 5px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 4rem;
+    line-height: 50%;
+    padding-top: 40px;
+}
+
+p {
+    text-shadow: none;
+    font-size: 1.2rem;
+}
+
+.poo {
+    padding-bottom: 50px;
+}
+
+.fa-poo {
+    font-size: 2.5rem;
+    text-shadow: rgba(243, 149, 247, 0.842) 1px 0 10px;
+}
+
+
+.fart {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    color: #77dd77;
+    font-family: 'Rock Salt', cursive;
+    align-items: center;
+    text-align: center;
+    text-shadow: rgba(243, 149, 247, 0.842) 1px 0 10px;
+    font-size: 2rem;
+    font-weight: bolder;
+    text-shadow: none;
+    border: solid;
+    border-radius: 20px;
+    background-color: #836953;
+    outline: none;
+}
+
+.active {
+    color: rgba(243, 149, 247, 0.842);
+}
