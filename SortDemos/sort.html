@@ -16,8 +16,10 @@
 
   <!-- script to draw the screen -->
   <script>
+    // variables used to interact with canvas
     var canvas, context;
 
+    // sets the frames per second on the screen
     var framesPerSec = 60;
 
     window.onload = function () {
@@ -26,10 +28,11 @@
 
       document.addEventListener("keydown", triggerSort);
 
-      setInterval(drawAll, 1000 / framesPerSec);
+      setInterval(drawBars, 1000 / framesPerSec);
     };
 
-    function drawAll() {
+    // draws the bar grid on the screen
+    function drawBars() {
       context.fillStyle = "black";
       context.fillRect(0, 0, WIDTH, HEIGHT);
       for (let i = 0; i < lineLayout.length; i++) {

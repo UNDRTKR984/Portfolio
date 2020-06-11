@@ -1,22 +1,28 @@
+//properties on the screen
 const WIDTH = 800;
 const CANV_WIDTH = 600;
 const INSTRUCTIONS = 200;
 const HEIGHT = 600;
 
+//properties of the each bar and the grid
 const LINE_GAP = 1;
 const LINE_W = 6;
 const EACH_LINE = LINE_GAP + LINE_W;
 var lineHeight;
 
+
+// optional code used to color bars as it sorts
 const WHITE = 1;
 const ORANGE = 2;
 
+// create an array of random sizes
 var lineLayout = new Array((WIDTH - INSTRUCTIONS) / LINE_W);
 console.log(lineLayout.length);
 for (let i = 0; i < lineLayout.length; i++) {
   lineLayout[i] = Math.floor(Math.random() * 600);
 }
 
+// bubble sort
 async function bubbleSort(arr) {
   var swapped = true;
   while (swapped) {
@@ -31,6 +37,7 @@ async function bubbleSort(arr) {
   return arr;
 }
 
+// insertion sort
 async function insertionSort(arr) {
   if (arr.length == 1) {
     return arr;
@@ -49,6 +56,7 @@ async function insertionSort(arr) {
   return arr;
 }
 
+// selection sort
 async function selectionSort(arr) {
   var smallest;
   for (let i = 0; i < arr.length; i++) {
@@ -65,6 +73,7 @@ async function selectionSort(arr) {
   return arr;
 }
 
+// quick sort
 async function quickSort(items, left, right) {
   var index;
 
@@ -86,6 +95,7 @@ async function quickSort(items, left, right) {
   return items;
 }
 
+// helper function for quick sort
 async function partition(items, left, right) {
   var pivot = items[Math.floor((right + left) / 2)],
     i = left,
@@ -110,6 +120,7 @@ async function partition(items, left, right) {
   return i;
 }
 
+// helper function for several of the sorts
 async function swap(arr, idx1, idx2, speed) {
   await sleep(1000 / speed);
   var temp = arr[idx1];
@@ -117,20 +128,34 @@ async function swap(arr, idx1, idx2, speed) {
   arr[idx2] = temp;
 }
 
+// used to slow down the execution of the functions so it can be shown on screen
 function sleep(fps) {
   return new Promise((resolve) => setTimeout(resolve, fps));
 }
 
+// a function that does nothing except log swapped on the screen
 function doNothing() {
   console.log("swapped");
   return;
 }
 
+// radix sort
 async function radixSort(nums) {
   var maxDigits = mostDigits(nums);
 
   for (let k = 0; k < maxDigits; k++) {
-    let buckets = [[], [], [], [], [], [], [], [], [], []];
+    let buckets = [
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ];
     for (let i = 0; i < nums.length; i++) {
       let digit = getDigit(nums[i], k);
       buckets[digit].push(nums[i]);
@@ -142,7 +167,7 @@ async function radixSort(nums) {
   return nums;
 }
 
-// returns the number of the given digit-place of a number i.e. 21, if place is 0 then returns 1
+// returns the number of the given digit-place of a number
 function getDigit(num, i) {
   return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
 }
@@ -164,6 +189,7 @@ function mostDigits(nums) {
   return maxDigits;
 }
 
+// merge sort
 async function mergeSort(arr) {
   if (arr.length <= 1) {
     return arr;
@@ -175,6 +201,7 @@ async function mergeSort(arr) {
   return await merge(left, right);
 }
 
+// helper function for merge sort
 async function merge(arr1, arr2) {
   await sleep(1000 / 20);
   var newArr = [];
