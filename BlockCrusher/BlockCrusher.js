@@ -1,13 +1,11 @@
-// assign brick grid constants
+// brick grid constants
 const BRICK_W = 80;
 const BRICK_H = 20;
 const BRICK_GAP = 2;
 const BRICK_COLS = 10;
 const BRICK_ROWS = 9;
 
-
-
-// assign paddle size constants
+// paddle size constants
 const PADDLE_WIDTH = 120;
 const PADDLE_THICKNESS = 10;
 const PADDLE_GAP_BOTTOM = 60;
@@ -29,13 +27,12 @@ var ballSpeedY = 9;
 // number of chances to play before grid resets
 var numBalls = 3;
 
-// used to implement things with the canvas
-var canvas, context;
-
-
 // used to assign mouse position
 var mouseX;
 var mouseY;
+
+// used to implement things with the canvas
+var canvas, context;
 
 // updates everything on screen
 function updateAll() {
@@ -57,16 +54,20 @@ function ballMove() {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
 
+    // if ball hits the edge of playing screen
+
     if (ballX > canvas.width && ballSpeedX > 0.0) {
         ballSpeedX = -ballSpeedX;
     }
     if (ballX < 0 && ballSpeedX < 0.0) {
         ballSpeedX = -ballSpeedX;
     }
+    // bottom part of screen? reset the ball and reduce number of balls remaining
     if (ballY > canvas.height) {
-        // bottom part of screen
         ballReset();
         numBalls--;
+
+        // out of balls? reset the game
         if (numBalls === 0) {
             resetBlocks();
             numBalls = 3;
@@ -78,7 +79,7 @@ function ballMove() {
 }
 
 
-// is there a brick at this particular column and row? what is the value?
+// is there an active brick at this particular column and row area on the screen?
 function isBrickAtColRow(col, row) {
     if (col >= 0 && col < BRICK_COLS && row >= 0 && row < BRICK_ROWS) {
         var brickIndexUnderCoord = rowColToArrayIndex(col, row);
@@ -93,11 +94,12 @@ function isBrickAtColRow(col, row) {
 function collisions() {
     var ballBrickCol = Math.floor(ballX / BRICK_W);
     var ballBrickRow = Math.floor(ballY / BRICK_H);
-    var brickIndexUnderBall = rowColToArrayIndex(
+    var brickIndexAtBall = rowColToArrayIndex(
         ballBrickCol,
         ballBrickRow
     );
 
+    // is the ball currently where a brick could be?
     if (
         ballBrickCol >= 0 &&
         ballBrickCol < BRICK_COLS &&
@@ -105,12 +107,14 @@ function collisions() {
         ballBrickRow < BRICK_ROWS
     ) {
         if (isBrickAtColRow(ballBrickCol, ballBrickRow)) {
-            brickGrid[brickIndexUnderBall]--;
-            if (brickGrid[brickIndexUnderBall] === 0) {
-                brickGrid[brickIndexUnderBall] = false;
+            // reduce value of brick, if moves to zero turn the brick false to remove it
+            brickGrid[brickIndexAtBall]--;
+            if (brickGrid[brickIndexAtBall] === 0) {
+                brickGrid[brickIndexAtBall] = false;
                 bricksLeft--;
             }
 
+            // determine previous ball position
             var prevBallX = ballX - ballSpeedX;
             var prevBallY = ballY - ballSpeedY;
             var prevBrickCol = Math.floor(prevBallX / BRICK_W);
@@ -118,24 +122,29 @@ function collisions() {
 
             var bothTestFailed = true;
 
+            // checks to see if the ball was in another column prior to hitting this brick and if there was a brick there
             if (prevBrickCol != ballBrickCol) {
+                // if no birck there change the lateral direction
                 if (!isBrickAtColRow(prevBrickCol, ballBrickRow) == false) {
                     ballSpeedX = -ballSpeedX;
                     bothTestFailed = false;
                 }
             }
+
+            // code if the the previous row is different
             if (prevBrickRow != ballBrickRow) {
                 var adjBrickTopBot = rowColToArrayIndex(
                     ballBrickCol,
                     prevBrickRow
                 );
 
+                // if no brick there, change the up-down direction
                 if (isBrickAtColRow(ballBrickCol, prevBrickRow) == false) {
                     ballSpeedY = -ballSpeedY;
                     bothTestFailed = false;
                 }
             }
-
+            // if the ball hits the corner of the brick with no blocks adjacent to that side
             if (bothTestFailed) {
                 ballSpeedX = -ballSpeedX;
                 ballSpeedY = -ballSpeedY;
@@ -159,10 +168,12 @@ function ballHitPaddle() {
     ) {
         ballSpeedY = -ballSpeedY;
 
+        // paddle control code -- farther away from center the faster it will move laterally
         var centerofPaddle = paddleX + PADDLE_WIDTH / 2;
         var ballDistFromPaddleCenter = ballX - centerofPaddle;
         ballSpeedX = ballDistFromPaddleCenter * 0.35;
 
+        // no bricks left? reset the grid
         if (bricksLeft == 0) {
             resetBlocks();
         }
@@ -190,11 +201,13 @@ function drawAll() {
     drawBricks();
 }
 
+// helper function to draw rectangle to screen
 function drawRectangle(topX, topY, bottomX, bottomY, color) {
     context.fillStyle = color;
     context.fillRect(topX, topY, bottomX, bottomY);
 }
 
+// helper function to draw a circle to screen
 function drawCircle(ballX, ballY, radius, color) {
     context.fillStyle = color;
     context.beginPath();
