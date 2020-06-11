@@ -159,6 +159,8 @@ class WeightedGraph {
         //store the path into answer
         var answer = path.reverse();
 
+        console.log(answer.length);
+
         // iterate through the answer (index of each vertex) to highlight the path back to the starting node
         for (let i = 0; i < answer.length; i++) {
           if (vertexGrid[answer[i]] != RED) {
@@ -265,6 +267,8 @@ class WeightedGraph {
 
         //store the path into answer
         var answer = path.reverse();
+
+        console.log(answer.length);
 
         // iterate through the answer (index of each vertex) to highlight the path back to the starting node
         for (let i = 0; i < answer.length; i++) {
@@ -485,7 +489,7 @@ class WeightedGraph {
     for (let i = 0; i < VERTEX_COLS * VERTEX_ROWS; i++) {
       xDist = Math.abs((i % VERTEX_COLS) - startX);
       yDist = Math.abs(Math.floor(i / VERTEX_ROWS) - startY);
-      weight = Math.sqrt(xDist * xDist + yDist * yDist) * 1.7;
+      weight = Math.sqrt(xDist * xDist + yDist * yDist) * 1.4;
       this.heuristic.push(weight);
     }
     return;
