@@ -7,89 +7,7 @@ class WeightedGraph {
 
   /////////////////accessors/////////////////
 
-  //depth first search of all the verticeies using recursion --- not ready yet to use
-  DFTr(vertex) {
-    var result = [];
-    var visited = {};
-    var adjacencyList = this.adjacencyList;
 
-    //to write a function in here need to use this syntax
-    function DepthFirstSearch(vertex) {
-      if (!adjacencyList[vertex]) {
-        return;
-      }
-      visited[vertex] = adjacencyList[vertex];
-      result.push(vertex);
-
-      for (let i = 0; i < adjacencyList[vertex].length; i++) {
-        if (!visited[adjacencyList[vertex][i]]) {
-          DepthFirstSearch(adjacencyList[vertex][i]);
-        }
-      }
-    }
-
-    //function call to what is written above
-    DepthFirstSearch(vertex);
-
-    return result;
-  }
-
-  // Depth first search of the nodes using Iteration  --- not ready yet to use
-  async DFTi(start) {
-    var stack = [];
-    var result = [];
-    var seen = {};
-
-    this.visited = [];
-    stack.push(start);
-
-    seen[start] = true;
-
-    while (stack.length > 0) {
-      var vertex = stack.pop();
-      result.push(vertex);
-      this.visited.push(vertex);
-      if (!instant) {
-        await this.sleep(1);
-      }
-
-      for (let i = 0; i < this.adjacencyList[vertex].length; i++) {
-        if (!seen[this.adjacencyList[vertex][i].node]) {
-          seen[this.adjacencyList[vertex][i].node] = true;
-          stack.push(this.adjacencyList[vertex][i].node);
-        }
-      }
-    }
-
-    return result;
-  }
-
-  // Breadth First search of the nodes  ---- node ready yet to use
-  async BFT(index) {
-    var queue = [index];
-    var result = [];
-    var seen = {};
-
-    seen[index] = true;
-
-    while (queue.length > 0) {
-      var vertex = queue.shift();
-      this.visited.push(vertex);
-      result.push(vertex);
-      vertex = this.adjacencyList[vertex];
-      if (!instant) {
-        await this.sleep(1);
-      }
-      for (let i = 0; i < vertex.length; i++) {
-        if (!seen[vertex[i].node]) {
-          seen[vertex[i].node] = true;
-          queue.push(vertex[i].node);
-        }
-      }
-    }
-
-    return result;
-  }
 
   // Dijsktra Algorithm to find shortest path between 2 nodes
   async Dijkstra(start, end) {
@@ -307,7 +225,7 @@ class WeightedGraph {
   }
 
 
-
+  // greedy search algorithm -- shows path
   async greedy(start, end) {
     // make a copy of adjacency list
     var list = this.adjacencyList;
@@ -415,9 +333,66 @@ class WeightedGraph {
     }
   }
 
-
+  // a function that can be used to slow function execution down
   sleep(fps) {
     return new Promise(resolve => setTimeout(resolve, fps));
+  }
+
+  // Depth first search of the nodes using Iteration  --- Easter Egg in the console
+  async DFTi(start) {
+    var stack = [];
+    var result = [];
+    var seen = {};
+
+    this.visited = [];
+    stack.push(start);
+
+    seen[start] = true;
+
+    while (stack.length > 0) {
+      var vertex = stack.pop();
+      result.push(vertex);
+      this.visited.push(vertex);
+      if (!instant) {
+        await this.sleep(1);
+      }
+
+      for (let i = 0; i < this.adjacencyList[vertex].length; i++) {
+        if (!seen[this.adjacencyList[vertex][i].node]) {
+          seen[this.adjacencyList[vertex][i].node] = true;
+          stack.push(this.adjacencyList[vertex][i].node);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  // Breadth First search of the nodes  --- Easter Egg in the console
+  async BFT(index) {
+    var queue = [index];
+    var result = [];
+    var seen = {};
+
+    seen[index] = true;
+
+    while (queue.length > 0) {
+      var vertex = queue.shift();
+      this.visited.push(vertex);
+      result.push(vertex);
+      vertex = this.adjacencyList[vertex];
+      if (!instant) {
+        await this.sleep(1);
+      }
+      for (let i = 0; i < vertex.length; i++) {
+        if (!seen[vertex[i].node]) {
+          seen[vertex[i].node] = true;
+          queue.push(vertex[i].node);
+        }
+      }
+    }
+
+    return result;
   }
 
   /////////////////mutators//////////////////
