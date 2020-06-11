@@ -1,17 +1,17 @@
+// sets custom valume to the sounds (the original sound files are REALLY loud)
+const BUTTON_VOL = 0.2;
+const WRONG_VOL = 0.3;
+
+// initial game start values
 var gameStart = false;
 var level = 0;
 var index = 0;
 
 
-// sets custom valume to the sounds (the original sound files are REALLY loud)
-const BUTTON_VOL = 0.2;
-const WRONG_VOL = 0.3;
-
-// step 4
 // is used to check the user answer against the gamePattern
 var userClickedPattern = [];
 
-// step 2
+
 // holds the computer pattern sequence
 var gamePattern = [];
 
@@ -62,7 +62,6 @@ function sleep(fps) {
 }
 
 
-// step 4
 
 // Event listener that stores the click into the user clicked pattern, plays sound, and is used to check against the game pattern
 $(".btn").click(function () {
@@ -76,7 +75,7 @@ $(".btn").click(function () {
 });
 
 
-// step 5
+
 
 // animates the button being pressed
 function animatePress(currentColor) {
