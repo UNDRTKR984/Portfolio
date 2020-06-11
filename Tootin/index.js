@@ -20,6 +20,7 @@ document.addEventListener("keydown", function (pressed) {
 });
 
 
+//  plays the sound when a particular key is pressed
 function sound(key) {
 
     switch (key) {
@@ -73,7 +74,7 @@ function sound(key) {
     }
 }
 
-
+// animated the key being pressed
 function animation(key) {
     var activeFart = document.querySelector("." + key);
     activeFart.classList.add("active");
