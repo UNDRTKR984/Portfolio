@@ -1,11 +1,25 @@
+    // just references to the canvas properties
+    const WIDTH = 800;
+    const HEIGHT = 600;
+
+    // grid propertes
+    const VERTEX_W = 10;
+    const VERTEX_H = 10;
+    const VERTEX_GAP = 1;
+    const VERTEX_COLS = 60;
+    const VERTEX_ROWS = 60;
+
+    // Constants used to specify what should happen to a given vertex
+    const BLUE = 1;
+    const RED = 2;
+    const VISITED = 3;
+    const PATH = 4;
+    const OFF = 0;
+
     // draws the canvas and all the verteces on the screen
     function drawAll() {
         drawRectangle(0, 0, canvas.width, canvas.height, "black");
         drawVerteces();
-
-        // this is a helper function used to find the coordinates of my mouse for debugging
-        // colorText(mouseVertexCol + ", " + mouseVertexRow + ": index of " + vertexIndexUnderMouse, mouseX, mouseY,
-        //     'white');
     }
 
     // helper function to make it easier to read.  Draws a rectangle/square on screen
@@ -101,3 +115,7 @@
             }
         }
     }
+
+    // this is a helper function used to find the coordinates of my mouse for debugging
+    // colorText(mouseVertexCol + ", " + mouseVertexRow + ": index of " + vertexIndexUnderMouse, mouseX, mouseY,
+    //     'white');
