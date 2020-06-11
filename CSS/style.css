@@ -295,6 +295,11 @@ body {
     opacity: 1;
 }
 
+.items .codeLink {
+    float: bottom;
+    left: -250px
+}
+
 .items .openButton {
     float: left;
     left: -200px;
@@ -303,6 +308,11 @@ body {
 .items .projectLink {
     float: right;
     right: -200px;
+}
+
+.items .item:hover .codeLink {
+    left: 0px;
+    margin-top: 1px;
 }
 
 .items .item:hover .openButton {
