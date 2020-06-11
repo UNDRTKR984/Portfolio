@@ -1,8 +1,10 @@
 $(window).on("load", function () {
+    // load icon
     $(".loader .inner").fadeOut(500, function () {
         $(".loader").fadeOut(700);
     });
 
+    // fancy slides and transitions for the portfolio section
     $(".items").isotope({
         filter: '*',
         animationOptions: {
@@ -14,12 +16,14 @@ $(window).on("load", function () {
 })
 
 $(document).ready(function () {
+    // slides on the splash page
     $('#slides').superslides({
         animation: "fade",
         play: 5000,
         pagination: false
     });
 
+    // splash page text
     var typed = new Typed(".typed", {
         strings: ["Software Developer", "Coach"],
         typeSpeed: 80,
@@ -28,6 +32,7 @@ $(document).ready(function () {
         showCursor: false
     });
 
+    // Skills Section -- responsive carousel slider
     $('.owl-carousel').owlCarousel({
         loop: true,
         items: 6,
@@ -49,7 +54,7 @@ $(document).ready(function () {
     });
 
 
-
+    // optional animations for skills and stats below
     var skillsTopOffset = $(".skillsSection").offset().top;
     var statsTopOffset = $(".statsSection").offset().top;
     var countFinished = false;
@@ -85,10 +90,11 @@ $(document).ready(function () {
         }
     });
 
+    // Making a fancy box section with portfolio
     $("[data-fancybox]").fancybox();
 
 
-
+    // toggles which icons are shown
     $("#filters a").click(function () {
         $("#filters .current").removeClass("current");
         $(this).addClass("current");
@@ -108,7 +114,7 @@ $(document).ready(function () {
 
     });
 
-
+    // Navigation link click smooth scrolling
     $("#navigation li a").click(function (e) {
         e.preventDefault();
 
@@ -119,6 +125,7 @@ $(document).ready(function () {
         }, "slow")
     });
 
+    // sticky navigaation once scrolled past
     const nav = $("#navigation");
     const navTop = nav.offset().top;
 
