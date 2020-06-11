@@ -1,3 +1,4 @@
+// image elements
 var boat1 = document.createElement("img");
 var boat2 = document.createElement("img");
 var wallPic = document.createElement("img");
@@ -7,18 +8,22 @@ var finish = document.createElement("img");
 
 var picsToLoad; // set automatically below
 
+// called after each pic is loaded -- when it's done start game
 function countLoadedImagesAndLaunchIfReady() {
     picsToLoad--;
     if (picsToLoad == 0) {
+        // function on main.js
         imageLoadingDoneSoStartGame();
     }
 }
 
+// load individual images
 function beginLoadingImage(imgVar, filename) {
     imgVar.onload = countLoadedImagesAndLaunchIfReady;
     imgVar.src = filename;
 }
 
+// load each image
 function loadImages() {
     var imageList = [{
             varName: wallPic,
@@ -44,6 +49,8 @@ function loadImages() {
         }
     ];
     picsToLoad = imageList.length;
+
+    // iterate through and load each image
     for (var i = 0; i < imageList.length; i++) {
         beginLoadingImage(imageList[i].varName, imageList[i].fileName);
     }

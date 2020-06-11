@@ -1,3 +1,4 @@
+// boat drawing code
 function drawBitmapCenteredWithRotation(useBitmap, atX, atY, withAng) {
     context.save();
     context.translate(atX, atY);
@@ -8,18 +9,13 @@ function drawBitmapCenteredWithRotation(useBitmap, atX, atY, withAng) {
     context.restore();
 }
 
+// helper function to draw grid
 function drawRectangle(topX, topY, bottomX, bottomY, color) {
     context.fillStyle = color;
     context.fillRect(topX, topY, bottomX, bottomY);
 }
 
-function drawCircle(boatX, boatY, radius, color) {
-    context.fillStyle = color;
-    context.beginPath();
-    context.arc(boatX, boatY, radius, 0, Math.PI * 2, true);
-    context.fill();
-}
-
+// helper function to  write text to screen
 function colorText(showWords, textX, textY, fillColor) {
     context.fillStyle = fillColor;
     context.fillText(showWords, textX, textY);

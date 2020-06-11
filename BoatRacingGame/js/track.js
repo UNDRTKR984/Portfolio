@@ -1,16 +1,18 @@
+// racing track constants
 const TRACK_W = 40;
 const TRACK_H = 40;
 const TRACK_GAP = 2;
 const TRACK_COLS = 20;
 const TRACK_ROWS = 15;
 
-
+// code for different tile types
 const WATER = 0;
 const WALL = 1;
 const PLAYER_1_START = 2;
 const PALM = 3;
 const FINISH = 4;
 
+// this is the layout for the track
 var trackGrid = [1, 1, 1, 3, 1, 3, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 3, 1,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 3, 1,
@@ -30,11 +32,10 @@ var trackGrid = [1, 1, 1, 3, 1, 3, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 
 var restartTrack = [];
 
-function rowColToArrayIndex(col, row) {
-    return col + TRACK_COLS * row;
-}
 
 
+
+// draw the racing track
 function drawTracks() {
     for (var eachRow = 0; eachRow < TRACK_ROWS; eachRow++) {
         for (var eachCol = 0; eachCol < TRACK_COLS; eachCol++) {
@@ -63,7 +64,7 @@ function drawTracks() {
 }
 
 
-
+// finds the type of tile at a particular column and row
 function returnTileAtColRow(col, row) {
     if (col >= 0 && col < TRACK_COLS && row >= 0 && row < TRACK_ROWS) {
         var trackIndexUnderCoord = rowColToArrayIndex(col, row);
@@ -73,6 +74,12 @@ function returnTileAtColRow(col, row) {
     }
 }
 
+// helper function used to determine the index of the a tile
+function rowColToArrayIndex(col, row) {
+    return col + TRACK_COLS * row;
+}
+
+// track handling and collison code for each boat
 function boatTrackHandling(whichBoat) {
     var boatTrackCol = Math.floor(whichBoat.x / TRACK_W);
     var boatTrackRow = Math.floor(whichBoat.y / TRACK_H);
@@ -98,6 +105,6 @@ function boatTrackHandling(whichBoat) {
             console.log(whichBoat.name + " Wins!");
             loadLevel(trackGrid);
         }
-        // end of track found
-    } // end of valid col and row
-} // end of function
+
+    }
+}

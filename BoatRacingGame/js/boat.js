@@ -1,9 +1,10 @@
+// boat movement constants
 const WATERSPEED_DECAY_MULT = 0.96;
 const MOTOR_POWER = 0.3;
 const REVERSE_POWER = 0.3;
 const TURN_RATE = 0.1;
 
-class BoatClass {
+class Boat {
     constructor(IMG, name) {
         this.x = 75;
         this.y = 75;
@@ -25,6 +26,7 @@ class BoatClass {
 
     }
 
+    // boat controls
     setUpInput(upKey, rightKey, downKey, leftKey) {
         this.controlUp = upKey;
         this.controlRight = rightKey;
@@ -32,7 +34,7 @@ class BoatClass {
         this.controlLeft = leftKey;
     }
 
-
+    // reset the boat in starting positoin
     boatReset() {
         this.speed = 0;
         for (var eachRow = 0; eachRow < TRACK_ROWS; eachRow++) {
@@ -49,6 +51,7 @@ class BoatClass {
         }
     }
 
+    // boat movement code
     boatMove() {
         this.speed *= WATERSPEED_DECAY_MULT;
 
@@ -67,10 +70,12 @@ class BoatClass {
         this.x += Math.cos(this.angle) * this.speed;
         this.y += Math.sin(this.angle) * this.speed;
 
+        // on track.js -- handling and collision code
         boatTrackHandling(this);
 
     }
 
+    // drawing boat to screen
     boatDraw() {
 
         drawBitmapCenteredWithRotation(this.IMG, this.x, this.y, this.angle);

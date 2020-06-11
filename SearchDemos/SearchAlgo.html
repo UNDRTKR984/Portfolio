@@ -13,7 +13,7 @@
     <!-- start the canvas by using canvas tag -->
     <canvas id="searchCanvas" width="800" height="600"></canvas>
   </div>
-
+  <!-- Details Given to User about Instant and Dynamic Find -->
   <div class="col details">
     <h3>Instant Find</h3>
     <p>Finds the path instantly. You can toggle nodes visited on and off</p>
@@ -98,120 +98,7 @@
       instructions();
     }
 
-    // provides instructions to the user on how to execute the algorithm
-    function instructions() {
-      // set the fond and weight of the text
-      context.fillStyle = "white";
-      context.font = "20px Arial";
 
-      //set the content in the text and position on canvas
-      context.fillText(
-        "Searching Algorithm",
-        VERTEX_W * VERTEX_COLS + 10,
-        50
-      );
-      context.fillText("Visual Demo", VERTEX_W * VERTEX_COLS + 40, 100);
-
-      if (numClicks == 0) {
-        context.font = "16px Arial";
-        context.fillText(
-          "Click on a Block",
-          VERTEX_W * VERTEX_COLS + 40,
-          200
-        );
-      }
-      if (numClicks == 1) {
-        context.font = "16px Arial";
-        context.fillText(
-          "Click on another Block",
-          VERTEX_W * VERTEX_COLS + 25,
-          200
-        );
-      }
-      if (numClicks > 1) {
-        context.font = "12px Arial";
-        context.fillText(
-          "Drag a path with your mouse",
-          VERTEX_W * VERTEX_COLS + 5,
-          200
-        );
-        context.fillText(
-          "to setup a road block between the",
-          VERTEX_W * VERTEX_COLS + 5,
-          220
-        );
-        context.fillText(
-          "2 nodes (optional) and then PRESS:",
-          VERTEX_W * VERTEX_COLS + 5,
-          240
-        );
-        context.fillText(
-          "'D' - for Dijkstra's (shortest path)",
-          VERTEX_W * VERTEX_COLS + 10,
-          260
-        );
-        context.fillText(
-          "'A' - for A* (shortest path)",
-          VERTEX_W * VERTEX_COLS + 10,
-          275
-        );
-        context.fillText(
-          "'G' - for Greedy Search",
-          VERTEX_W * VERTEX_COLS + 10,
-          290
-        );
-      }
-      context.font = "11px Arial";
-      drawRectangle(VERTEX_COLS * VERTEX_W + 25, 320, 150, 50, "green");
-      context.fillStyle = "white";
-      if (!toggleVisitedVerteces) {
-        context.fillText(
-          "  Click to SHOW any extra",
-          VERTEX_COLS * VERTEX_W + 27,
-          340
-        );
-        context.fillText(
-          "   nodes that were Visited",
-          VERTEX_COLS * VERTEX_W + 27,
-          360
-        );
-        hideVisited();
-      }
-      if (toggleVisitedVerteces) {
-        context.fillText(
-          "Click to HIDE Visited Nodes",
-          VERTEX_COLS * VERTEX_W + 32,
-          340
-        );
-        toggleVisited();
-      }
-      if (instant) {
-        drawRectangle(VERTEX_COLS * VERTEX_W + 25, 380, 150, 50, "purple");
-        context.fillStyle = "white";
-        context.fillText("Click for DYNAMIC find", VERTEX_COLS * VERTEX_W + 40,
-          400
-        );
-        // context.fillText("Goes much slower but", VERTEX_COLS * VERTEX_W + 40,
-        //   410);
-        // context.fillText("shows search in real time", VERTEX_COLS * VERTEX_W + 36,
-        //   425);
-      }
-      if (!instant) {
-        drawRectangle(VERTEX_COLS * VERTEX_W + 25, 380, 150, 50, "red");
-        context.fillStyle = "white";
-        context.fillText("Click for INSTANT find", VERTEX_COLS * VERTEX_W + 40,
-          400
-        );
-      }
-
-      context.font = "13px Arial";
-      context.fillStyle = "white";
-      context.fillText("REFRESH page", VERTEX_W * VERTEX_COLS + 50, 450);
-      drawRectangle(VERTEX_COLS * VERTEX_W + 25, 460, 150, 100, "white");
-      context.fillStyle = "black";
-      context.fillText("Or CLICK this BOX", VERTEX_COLS * VERTEX_W + 40, 480);
-      context.fillText("to start over", VERTEX_COLS * VERTEX_W + 60, 500);
-    }
 
     function isVertexAtColRow(col, row) {
       if (col >= 0 && col < VERTEX_COLS && row >= 0 && row < VERTEX_ROWS) {
@@ -227,113 +114,7 @@
       return col + VERTEX_COLS * row;
     }
 
-    // draws the canvas and all the verteces on the screen
-    function drawAll() {
-      drawRectangle(0, 0, canvas.width, canvas.height, "black");
-      drawVerteces();
 
-      // this is a helper function used to find the coordinates of my mouse for debugging
-      // colorText(mouseVertexCol + ", " + mouseVertexRow + ": index of " + vertexIndexUnderMouse, mouseX, mouseY,
-      //     'white');
-    }
-
-    // helper function to make it easier to read.  Draws a rectangle/square on screen
-    function drawRectangle(topX, topY, bottomX, bottomY, color) {
-      context.fillStyle = color;
-      context.fillRect(topX, topY, bottomX, bottomY);
-    }
-
-    // resets everything back to when page first loaded
-    function vertexReset() {
-      vertexsLeft = 0;
-      numClicks = 0;
-      vertex1 = null;
-      vertex2 = null;
-      g.rebuild();
-
-      for (i = 0; i < VERTEX_COLS * VERTEX_ROWS; i++) {
-        vertexGrid[i] = BLUE;
-        vertexsLeft++;
-      }
-    }
-
-    // draws all the verteces on the screen -- is called constantly so will show updates when the verteces change
-    function drawVerteces() {
-      for (var eachRow = 0; eachRow < VERTEX_ROWS; eachRow++) {
-        for (var eachCol = 0; eachCol < VERTEX_COLS; eachCol++) {
-          var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-          if (vertexGrid[arrayIndex] === BLUE) {
-            drawRectangle(
-              VERTEX_W * eachCol,
-              VERTEX_H * eachRow,
-              VERTEX_W - VERTEX_GAP,
-              VERTEX_H - VERTEX_GAP,
-              "blue"
-            );
-          }
-          if (vertexGrid[arrayIndex] === RED) {
-            drawRectangle(
-              VERTEX_W * eachCol,
-              VERTEX_H * eachRow,
-              VERTEX_W - VERTEX_GAP,
-              VERTEX_H - VERTEX_GAP,
-              "red"
-            );
-          }
-          if (vertexGrid[arrayIndex] === PATH) {
-            drawRectangle(
-              VERTEX_W * eachCol,
-              VERTEX_H * eachRow,
-              VERTEX_W - VERTEX_GAP,
-              VERTEX_H - VERTEX_GAP,
-              "white"
-            );
-          }
-          if (vertexGrid[arrayIndex] === VISITED) {
-            drawRectangle(
-              VERTEX_W * eachCol,
-              VERTEX_H * eachRow,
-              VERTEX_W - VERTEX_GAP,
-              VERTEX_H - VERTEX_GAP,
-              "green"
-            );
-          }
-        }
-      }
-    }
-
-    function toggleVisited() {
-      for (let i = 0; i < g.visited.length; i++) {
-        if (vertexGrid[g.visited[i]] == BLUE) {
-          vertexGrid[g.visited[i]] = VISITED;
-        }
-      }
-    }
-
-    function resetVisited() {
-      for (let i = 0; i < g.visited.length; i++) {
-        if (
-          vertexGrid[g.visited[i]] == VISITED ||
-          vertexGrid[g.visited[i]] == PATH
-        ) {
-          vertexGrid[g.visited[i]] = BLUE;
-        }
-      }
-    }
-
-    function hideVisited() {
-      for (let i = 0; i < g.visited.length; i++) {
-        if (vertexGrid[g.visited[i]] == VISITED) {
-          vertexGrid[g.visited[i]] = BLUE;
-        }
-      }
-    }
-
-    // helper function if needed to write messages on the screen
-    function colorText(showWords, textX, textY, fillColor) {
-      context.fillStyle = fillColor;
-      context.fillText(showWords, textX, textY);
-    }
 
     // activates when mouse is clicked from the Event Listener above -- finds the position of mouse and acts accordingly
     function updateMouseDown(evt) {
@@ -417,7 +198,7 @@
       }
     }
 
-    // this function marks the starting and ending vertexes in the grind
+    // this function marks the starting and ending vertexes in the grid
     function makeRed() {
       // find the index number of the block the mouse is on
       var mouseVertexCol = Math.floor(mouseX / VERTEX_W);
@@ -482,6 +263,10 @@
       }
     }
   </script>
+  <!-- Drawing Code for the Grid -->
+  <script src="draw.js"></script>
+  <!-- File used for instructions on the canvas screen -->
+  <script src="instructions.js"></script>
   <!-- include the needed Weighted Graph JS file -->
   <script src="WeightedGraph.js"></script>
 </body>
