@@ -1,3 +1,4 @@
+// find viewing window height and apply it to splash video
 function windowH() {
     var wH = $(window).height();
 
@@ -5,9 +6,11 @@ function windowH() {
         height: wH
     });
 }
-
+// execute the code
 windowH();
 
+
+// load video on page load
 $(window).on('load', function () {
     //////code to call//////
     $("#P1").YTPlayer();
@@ -17,7 +20,11 @@ $(window).on('load', function () {
 });
 
 
+
+// things done when the document is ready
 $(document).ready(function () {
+
+    // sets the typing text for the splash page
     $('.demo').textyle({
         duration: 100,
         delay: 120,
@@ -39,6 +46,7 @@ $(document).ready(function () {
         // options here
     })
 
+    // sets the animation of the text on the screen
     $('.transition').smoove({
         offset: 150,
         opacity: 0,
@@ -50,6 +58,7 @@ $(document).ready(function () {
         min_height: false
     });
 
+    // sets the smooth transition when links are clicked on navbar
     $("#navigation li a").click(function (e) {
         e.preventDefault();
 
@@ -60,6 +69,7 @@ $(document).ready(function () {
         }, "slow")
     });
 
+    // sets a fixed "sticky" nav once we scroll far enough down the page
     const nav = $("#navigation");
     const navTop = nav.offset().top;
 
@@ -79,10 +89,12 @@ $(document).ready(function () {
 
     }
 
+    // in case we want to add a slider
     var mySwiper = new Swiper('.swiper-container', {
         slidesPerView: 1
     });
 
+    // modals for info on each coach when clicked (view their profile)
     $('a.open-modal').click(function (event) {
         $(this).modal({
             fadeDuration: 250
