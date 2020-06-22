@@ -1,12 +1,12 @@
 body {
   text-align: center;
-  background-color: #0a3d62;
+  background-color: #3d3d3d;
 }
 
 /* video game font text */
 #level-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 2rem;
+  font-family: 'Oxanium', cursive;
+  font-size: 2.5rem;
   margin: 4%;
   color: #f7f1e3;
 }
@@ -33,23 +33,23 @@ body {
 
 .red {
   background-color: #ff4d4d;
-  border-radius: 10% 100% 10% 0%;
+  border-radius: 10% 0% 10% 100%;
 }
 
 .green {
   background-color: #32ff7e;
-  border-radius: 100% 10% 0% 10%;
+  border-radius: 0% 10% 100% 10%;
 
 }
 
 .blue {
   background-color: #18dcff;
-  border-radius: 0% 10% 100% 10%;
+  border-radius: 100% 10% 0% 10%;
 }
 
 .yellow {
   background-color: #fffa65;
-  border-radius: 10% 0% 10% 100%;
+  border-radius: 10% 100% 10% 0%;
 }
 
 .pressed {
