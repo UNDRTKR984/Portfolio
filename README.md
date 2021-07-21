@@ -1,2 +1,2 @@
 # portfolio
-This is my portfolio of projects.  I hope you enjoy!
+This is a portfolio of different projects.
